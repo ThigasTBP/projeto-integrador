@@ -9,6 +9,7 @@ router.get("/", (req, res) => {
 const usercontroller = require('./usercontroller')
 const loginController=require('./logincontroller')
 const personagemcontroller=require('./personagemcontroller')
+const racacontroller=require('./racacontroller')
 
 router.post('/login', loginController.loginUser)
 
@@ -23,5 +24,11 @@ router.get('/personagem/:id_personagem', loginController.autenticarToken, person
 router.post('/personagem',personagemcontroller.adicionarPersonagem)
 router.patch('/personagem',personagemcontroller.atualizarPersonagem)
 router.delete('/personagem',loginController.autenticarToken,personagemcontroller.deletarPersonagem)
+
+router.get('/raca', loginController.autenticarToken, racacontroller.listaRaca)
+router.get('/raca/:cod_raca', loginController.autenticarToken, racacontroller.buscarRaca)
+router.post('/raca', racacontroller.adicionarRaca)
+router.patch('/raca/:cod_raca', loginController.autenticarToken, racacontroller.atualizarRaca)
+router.delete('/raca/:cod_raca', loginController.autenticarToken, racacontroller.deletarRaca)
 
 module.exports = router;

@@ -9,7 +9,7 @@ const personagemSchema = joi.object({
     inteligencia: joi.string().max(2).required(),
     sabedoria: joi.string().max(2).required(),
     carisma: joi.string().max(2).required(),
-    nome: joi.string().max(50).required(),
+    nome: joi.string().required(),
     nivel_total: joi.string().max(2).required(),
     vida_atual: joi.string().required(),
     mana_atual: joi.string().required(),
@@ -22,7 +22,7 @@ const personagemSchema = joi.object({
 exports.listaPersonagem=(req,res)=>{
     db.query('select * from personagem', (err, result)=> {
         if (err) {
-            console.error('erro ao buscar os personagem:', err);
+            console.error('erro ao listar os personagem:', err);
             res.status(500).json({ error: 'erro interno do servidor'});
         };
         res.json(result);
@@ -66,7 +66,7 @@ exports.adicionarPersonagem = (req, res) => {
     }
     db.query('insert into personagem set ?', novoPersonagem, (err, result)=>{
         if (err){
-            console.error('error ao adicionar personagem:', err);
+            console.error('erro ao adicionar personagem:', err);
             res.status(500).json({ error: 'erro interno do servidor'});
             return;
         };
