@@ -30,11 +30,11 @@ exports.buscarUser = (req, res) => {
 };
 
 exports.adicionarUser = (req, res) => {
-    const { email, senha, } = req.body;
+    const { email, senha } = req.body;
     const { error } = userSchema.validate({ email, senha });
 
     if (error) {
-        res.status(400).json({ error: 'dados de cliente invalidos' });
+        res.status(400).json({ error: 'dados de personagem invalidos' });
         return;
     }
     bcrypt.hash(senha, 10, (err, hash) => {
@@ -50,10 +50,10 @@ exports.adicionarUser = (req, res) => {
         db.query('insert into usuario set ?', novoUser, (err, result) => {
             if (err) {
                 console.error('Error ao adicionar cliente:', err);
-                res.status(500).json({ error: 'erro interno do servidor ' });
+                res.status(500).json({ error: 'erro interno do servidor' });
                 return;
             };
-            res.json({ message: 'cliente adicionado com sucesso' });
+            res.json({ message: 'usuario adicionado com sucesso' });
         });
     });
 };
@@ -91,7 +91,7 @@ exports.deletarUser = (req, res) => {
     const { id_user } = req.params;
     db.query('delete from usuario where id_user = ?', id_user, (err, result) => {
         if (err) {
-            console.error('erro ao deletar cliente:', err);
+            console.error('erro ao deletar usuario:', err);
             res.status(500).json({ error: 'erro interno do servidor' });
             return;
         };

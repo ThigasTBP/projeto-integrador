@@ -8,6 +8,7 @@ router.get("/", (req, res) => {
 
 const usercontroller = require('./usercontroller')
 const loginController=require('./logincontroller')
+const personagemcontroller=require('./personagemcontroller')
 
 router.post('/login', loginController.loginUser)
 
@@ -16,5 +17,11 @@ router.get('/user/:id_user', loginController.autenticarToken, usercontroller.bus
 router.post('/user', usercontroller.adicionarUser);
 router.patch('/user/:id_user', usercontroller.atualizarUser);
 router.delete('/user/:id_user', loginController.autenticarToken, usercontroller.deletarUser);
+
+router.get('/personagem', loginController.autenticarToken, personagemcontroller.listaPersonagem)
+router.get('/personagem/:id_personagem', loginController.autenticarToken, personagemcontroller.buscarPersonagem)
+router.post('/personagem',personagemcontroller.adicionarPersonagem)
+router.patch('/personagem',personagemcontroller.atualizarPersonagem)
+router.delete('/personagem',loginController.autenticarToken,personagemcontroller.deletarPersonagem)
 
 module.exports = router;
