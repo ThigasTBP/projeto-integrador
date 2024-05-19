@@ -10,25 +10,32 @@ const usercontroller = require('./usercontroller')
 const loginController=require('./logincontroller')
 const personagemcontroller=require('./personagemcontroller')
 const racacontroller=require('./racacontroller')
+const classecontroller=require('./classecontroller')
 
 router.post('/login', loginController.loginUser)
 
 router.get('/user', loginController.autenticarToken, usercontroller.listaUser);
 router.get('/user/:id_user', loginController.autenticarToken, usercontroller.buscarUser);
 router.post('/user', usercontroller.adicionarUser);
-router.patch('/user/:id_user', usercontroller.atualizarUser);
+router.patch('/user/:id_user', loginController.autenticarToken, usercontroller.atualizarUser);
 router.delete('/user/:id_user', loginController.autenticarToken, usercontroller.deletarUser);
 
 router.get('/personagem', loginController.autenticarToken, personagemcontroller.listaPersonagem)
-router.get('/personagem/:id_personagem', loginController.autenticarToken, personagemcontroller.buscarPersonagem)
-router.post('/personagem',personagemcontroller.adicionarPersonagem)
-router.patch('/personagem',personagemcontroller.atualizarPersonagem)
-router.delete('/personagem',loginController.autenticarToken,personagemcontroller.deletarPersonagem)
+router.get('/personagem/:cod_personagem', loginController.autenticarToken, personagemcontroller.buscarPersonagem)
+router.post('/personagem',loginController.autenticarToken, personagemcontroller.adicionarPersonagem)
+router.patch('/personagem/:cod_personagem',loginController.autenticarToken, personagemcontroller.atualizarPersonagem)
+router.delete('/personagem/:cod_personagem',loginController.autenticarToken,personagemcontroller.deletarPersonagem)
 
 router.get('/raca', loginController.autenticarToken, racacontroller.listaRaca)
 router.get('/raca/:cod_raca', loginController.autenticarToken, racacontroller.buscarRaca)
-router.post('/raca', racacontroller.adicionarRaca)
+router.post('/raca', loginController.autenticarToken, racacontroller.adicionarRaca)
 router.patch('/raca/:cod_raca', loginController.autenticarToken, racacontroller.atualizarRaca)
 router.delete('/raca/:cod_raca', loginController.autenticarToken, racacontroller.deletarRaca)
+
+router.get('/classe', loginController.autenticarToken, classecontroller.listaClasse);
+router.get('/classe/:cod_classe', loginController.autenticarToken, classecontroller.buscarClasse);
+router.post('/classe', loginController.autenticarToken, classecontroller.adicionarClasse )
+router.patch('/classe/:cod_classe', loginController.autenticarToken, classecontroller.atualizarClasse)
+router.delete('/classe/cod_classe', loginController.autenticarToken, classecontroller.deletarClasse)
 
 module.exports = router;
