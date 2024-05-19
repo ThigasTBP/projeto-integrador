@@ -8,22 +8,21 @@ const habilidadeRacialSchema = joi.object({
 })
 
 exports.listaHabilidadeRacial = (req, res) => {
-    db.query('select * from habilidade_racial', (err, result)=>{
+    db.query('select * from habilidade_racial', (err, result) => {
         if (err) {
             console.error('erro ao listar habilidades de raça:', err);
-            res.status(500).json({ error: 'erro interno do servidor'});
-
+            res.status(500).json({ error: 'erro interno do servidor' });
         }
         res.json(result);
     })
 }
 
-exports.buscarHabilidadeRacial = (req, res)=> {
+exports.buscarHabilidadeRacial = (req, res) => {
     const { cod_habilidade } = req.params;
-    db.query('select * from habilidade_racial where cod_habilidade = ?', cod_habilidade, (err, result) =>{
-        if(err) {
+    db.query('select * from habilidade_racial where cod_habilidade = ?', cod_habilidade, (err, result) => {
+        if (err) {
             console.error('erro ao buscar habilidade racial', err)
-            res.status(500).json({ error: 'habilidade de raça nao encontrada'})
+            res.status(500).json({ error: 'habilidade de raça nao encontrada' })
             return;
         }
         res.json(result[0])
@@ -32,29 +31,29 @@ exports.buscarHabilidadeRacial = (req, res)=> {
 
 exports.adicionarHabilidadeRacial = (req, res) => {
     const { nome, cod_raça } = req.body;
-    const { error } = habilidadeRacialSchema.validate({nome, cod_raça});
+    const { error } = habilidadeRacialSchema.validate({ nome, cod_raça });
     if (error) {
-        res.status(400).json({error: 'dados de habilidade racial invalidas'});
+        res.status(400).json({ error: 'dados de habilidade racial invalidas' });
         return;
     }
     const novoHabilidadeRacial = {
         nome,
         cod_raça
     }
-    db.query('insert into habilidade_racial set ?', novoHabilidadeRacial, (err, result)=>{
-        if (err){
+    db.query('insert into habilidade_racial set ?', novoHabilidadeRacial, (err, result) => {
+        if (err) {
             console.error('erro ao adicionar habilidade de raça:', err);
-            res.status(500).json({ error: 'erro interno do servidor'});
+            res.status(500).json({ error: 'erro interno do servidor' });
             return;
         }
-        res.json({ message: 'habilidade de raça adicionado com sucesso'})
+        res.json({ message: 'habilidade de raça adicionado com sucesso' })
     })
 }
 
-exports.atualizarHabilidadeRacial = (req,res)=>{
-    const {cod_habilidade}=req.params;
-    const {nome, cod_raça}=req.body;
-    const { error } = habilidadeRacialSchema.validade({nome, cod_raça});
+exports.atualizarHabilidadeRacial = (req, res) => {
+    const { cod_habilidade } = req.params;
+    const { nome, cod_raça } = req.body;
+    const { error } = habilidadeRacialSchema.validade({ nome, cod_raça });
     if (error) {
         res.status(400).json({ error: 'dados invalidos' })
         return;
@@ -69,7 +68,7 @@ exports.atualizarHabilidadeRacial = (req,res)=>{
             res.status(500).json({ error: 'erro interno do servidor' });
             return
         }
-        res.json({ message: 'usuario atualizado com sucesso' });
+        res.json({ message: 'habilidade racial atualizado com sucesso' });
     })
 }
 

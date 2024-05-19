@@ -12,6 +12,7 @@ const personagemcontroller=require('./personagemcontroller')
 const racacontroller=require('./racacontroller')
 const classecontroller=require('./classecontroller')
 const habilidadeRacialcontroller=require('./habilidadeRacialController')
+const poderClasseController=require('./poderesClasseController')
 
 router.post('/login', loginController.loginUser)
 
@@ -39,10 +40,16 @@ router.post('/classe', loginController.autenticarToken, classecontroller.adicion
 router.patch('/classe/:cod_classe', loginController.autenticarToken, classecontroller.atualizarClasse)
 router.delete('/classe/cod_classe', loginController.autenticarToken, classecontroller.deletarClasse)
 
-router.get('/habilidadeRacial', loginController.autenticarToken, habilidadeRacialcontroller.listaHabilidadeRacial)
-router.get('/habilidadeRacial/:cod_habilidade', loginController.autenticarToken, habilidadeRacialcontroller.listaHabilidadeRacial)
-router.post('/habilidadeRacial', loginController.autenticarToken, habilidadeRacialcontroller.adicionarHabilidadeRacial)
-router.patch('/habilidadeRacial/:cod_habilidade', loginController.autenticarToken, habilidadeRacialcontroller.atualizarHabilidadeRacial)
-router.delete('/habilidadeRacial/:cod_habilidade', loginController.autenticarToken, habilidadeRacialcontroller.deletarHabilidadeRacial)
+router.get('/habilidaderacial', loginController.autenticarToken, habilidadeRacialcontroller.listaHabilidadeRacial)
+router.get('/habilidaderacial/:cod_habilidade', loginController.autenticarToken, habilidadeRacialcontroller.listaHabilidadeRacial)
+router.post('/habilidaderacial', loginController.autenticarToken, habilidadeRacialcontroller.adicionarHabilidadeRacial)
+router.patch('/habilidaderacial/:cod_habilidade', loginController.autenticarToken, habilidadeRacialcontroller.atualizarHabilidadeRacial)
+router.delete('/habilidaderacial/:cod_habilidade', loginController.autenticarToken, habilidadeRacialcontroller.deletarHabilidadeRacial)
+
+router.get('/poderclasse', loginController.autenticarToken, poderClasseController.listaPoderesClasse)
+router.get('/poderclasse/:cod_poder', loginController.autenticarToken, poderClasseController.buscarPoderesclasse)
+router.post('/poderclasse',loginController.autenticarToken, poderClasseController.adicionarPoderClasse)
+router.patch('/poderclasse/cod_poder', loginController.autenticarToken, poderClasseController.atualizarPoderClasse)
+router.delete('/poderclasse/cod_poder', loginController.autenticarToken, poderClasseController.deletarPoderClasse)
 
 module.exports = router;
