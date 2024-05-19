@@ -11,6 +11,7 @@ const loginController=require('./logincontroller')
 const personagemcontroller=require('./personagemcontroller')
 const racacontroller=require('./racacontroller')
 const classecontroller=require('./classecontroller')
+const habilidadeRacialcontroller=require('./habilidadeRacialController')
 
 router.post('/login', loginController.loginUser)
 
@@ -37,5 +38,11 @@ router.get('/classe/:cod_classe', loginController.autenticarToken, classecontrol
 router.post('/classe', loginController.autenticarToken, classecontroller.adicionarClasse )
 router.patch('/classe/:cod_classe', loginController.autenticarToken, classecontroller.atualizarClasse)
 router.delete('/classe/cod_classe', loginController.autenticarToken, classecontroller.deletarClasse)
+
+router.get('/habilidadeRacial', loginController.autenticarToken, habilidadeRacialcontroller.listaHabilidadeRacial)
+router.get('/habilidadeRacial/:cod_habilidade', loginController.autenticarToken, habilidadeRacialcontroller.listaHabilidadeRacial)
+router.post('/habilidadeRacial', loginController.autenticarToken, habilidadeRacialcontroller.adicionarHabilidadeRacial)
+router.patch('/habilidadeRacial/:cod_habilidade', loginController.autenticarToken, habilidadeRacialcontroller.atualizarHabilidadeRacial)
+router.delete('/habilidadeRacial/:cod_habilidade', loginController.autenticarToken, habilidadeRacialcontroller.deletarHabilidadeRacial)
 
 module.exports = router;
