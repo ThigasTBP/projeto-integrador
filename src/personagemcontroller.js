@@ -104,7 +104,7 @@ exports.atualizarPersonagem = (req, res) => {
             res.status(500).json({ error: 'erro interno do servidor' });
             return
         };
-        res.json({ message: 'usuario atualizado com sucesso' });
+        res.json({ message: 'personagem atualizado com sucesso' });
     });
 };
 

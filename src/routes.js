@@ -13,6 +13,8 @@ const racacontroller=require('./racacontroller')
 const classecontroller=require('./classecontroller')
 const habilidadeRacialcontroller=require('./habilidadeRacialController')
 const poderClasseController=require('./poderesClasseController')
+const aprendeController=require('./aprendeController')
+const magiaController=require('./magiaController')
 
 router.post('/login', loginController.loginUser)
 
@@ -51,5 +53,17 @@ router.get('/poderclasse/:cod_poder', loginController.autenticarToken, poderClas
 router.post('/poderclasse',loginController.autenticarToken, poderClasseController.adicionarPoderClasse)
 router.patch('/poderclasse/cod_poder', loginController.autenticarToken, poderClasseController.atualizarPoderClasse)
 router.delete('/poderclasse/cod_poder', loginController.autenticarToken, poderClasseController.deletarPoderClasse)
+
+router.get('/aprende', loginController.autenticarToken, aprendeController.listaAprende)
+router.get('/aprende/:cod_aprende', loginController.autenticarToken, aprendeController.buscarAprende)
+router.post('/aprende', loginController.autenticarToken, aprendeController.adicionarAprende)
+router.patch('/aprende/:cod_aprende', loginController.autenticarToken, aprendeController.atualizarAprende)
+router.delete('/aprende/:cod_aprende', loginController.autenticarToken, aprendeController.deletarAprende)
+
+router.get('/magia', loginController.autenticarToken, magiaController.listaMagia)
+router.get('/magia/:cod_magia', loginController.autenticarToken, magiaController.buscarMagia)
+router.post('/magia', loginController.autenticarToken, magiaController.adicionarMagia)
+router.patch('/magia/:cod_magia', loginController.autenticarToken, magiaController.atualizarMagia)
+router.delete('/magia/:cod_magia', loginController.autenticarToken, magiaController.deletarMagia)
 
 module.exports = router;
