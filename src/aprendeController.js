@@ -83,6 +83,6 @@ exports.deletarAprende = (req, res) => {
             res.status(500).json({ error: 'erro interno do servidor' })
             return
         }
-        res.json({ message: 'personagem deletado com sucesso' })
+        res.json({ message: 'aprende deletado com sucesso' })
     })
 }

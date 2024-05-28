@@ -8,7 +8,7 @@ const poderesClasseSchema = joi.object({
 })
 
 exports.listaPoderesClasse = (req, res) => {
-    db.query('select * from poderes_classe', (err, result)=>{
+    db.query('select * from poder_classe', (err, result)=>{
         if (err) {
             console.error('erro ao listar poderes de classe:', err);
             res.status(500).json({ error: 'erro interno do servidor' });
@@ -19,7 +19,7 @@ exports.listaPoderesClasse = (req, res) => {
 
 exports.buscarPoderesclasse = (req, res) => {
     const {cod_poder} = req.params;
-    db.query('select * from poderes_classe where cod_poder = ?', cod_poder, (err, result) => {
+    db.query('select * from poder_classe where cod_poder = ?', cod_poder, (err, result) => {
         if (err) {
             console.error('erro ao buscar poder de classe', err)
             res.status(500).json({ error: 'poder de classe nao encontrado' })
@@ -38,7 +38,7 @@ exports.adicionarPoderClasse = (req, res) => {
     }
     const novoPoderClasse = {
         nome,
-        cod_poder
+        cod_classe
     }
     db.query('insert into poder_classe set ?', novoPoderClasse, (err, result) => {
         if (err) {
@@ -53,7 +53,7 @@ exports.adicionarPoderClasse = (req, res) => {
 exports.atualizarPoderClasse = (req, res) => {
     const {cod_poder} = req.params
     const {nome, cod_classe} = req.body
-    const {error} = poderesClasseSchema.validade({ nome, cod_classe});
+    const {error} = poderesClasseSchema.validate({ nome, cod_classe});
     if (error) {
         res.status(400).json({ error: 'dados invalidos'})
         return;

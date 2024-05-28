@@ -40,10 +40,10 @@ router.get('/classe', loginController.autenticarToken, classecontroller.listaCla
 router.get('/classe/:cod_classe', loginController.autenticarToken, classecontroller.buscarClasse);
 router.post('/classe', loginController.autenticarToken, classecontroller.adicionarClasse )
 router.patch('/classe/:cod_classe', loginController.autenticarToken, classecontroller.atualizarClasse)
-router.delete('/classe/cod_classe', loginController.autenticarToken, classecontroller.deletarClasse)
+router.delete('/classe/:cod_classe', loginController.autenticarToken, classecontroller.deletarClasse)
 
 router.get('/habilidaderacial', loginController.autenticarToken, habilidadeRacialcontroller.listaHabilidadeRacial)
-router.get('/habilidaderacial/:cod_habilidade', loginController.autenticarToken, habilidadeRacialcontroller.listaHabilidadeRacial)
+router.get('/habilidaderacial/:cod_habilidade', loginController.autenticarToken, habilidadeRacialcontroller.buscarHabilidadeRacial)
 router.post('/habilidaderacial', loginController.autenticarToken, habilidadeRacialcontroller.adicionarHabilidadeRacial)
 router.patch('/habilidaderacial/:cod_habilidade', loginController.autenticarToken, habilidadeRacialcontroller.atualizarHabilidadeRacial)
 router.delete('/habilidaderacial/:cod_habilidade', loginController.autenticarToken, habilidadeRacialcontroller.deletarHabilidadeRacial)
@@ -51,8 +51,8 @@ router.delete('/habilidaderacial/:cod_habilidade', loginController.autenticarTok
 router.get('/poderclasse', loginController.autenticarToken, poderClasseController.listaPoderesClasse)
 router.get('/poderclasse/:cod_poder', loginController.autenticarToken, poderClasseController.buscarPoderesclasse)
 router.post('/poderclasse',loginController.autenticarToken, poderClasseController.adicionarPoderClasse)
-router.patch('/poderclasse/cod_poder', loginController.autenticarToken, poderClasseController.atualizarPoderClasse)
-router.delete('/poderclasse/cod_poder', loginController.autenticarToken, poderClasseController.deletarPoderClasse)
+router.patch('/poderclasse/:cod_poder', loginController.autenticarToken, poderClasseController.atualizarPoderClasse)
+router.delete('/poderclasse/:cod_poder', loginController.autenticarToken, poderClasseController.deletarPoderClasse)
 
 router.get('/aprende', loginController.autenticarToken, aprendeController.listaAprende)
 router.get('/aprende/:cod_aprende', loginController.autenticarToken, aprendeController.buscarAprende)
