@@ -3,6 +3,7 @@ const joi = require('joi')
 const bcrypt = require('bcrypt')
 
 const personagemSchema = joi.object({
+    cod_personagem: joi.string().required(),
     forca: joi.string().max(2).required(),
     destreza: joi.string().max(2).required(),
     constituicao: joi.string().max(2).required(),
@@ -10,11 +11,11 @@ const personagemSchema = joi.object({
     sabedoria: joi.string().max(2).required(),
     carisma: joi.string().max(2).required(),
     nome: joi.string().required(),
-    nivel_total: joi.string().max(2).required(),
-    vida_atual: joi.string().required(),
-    mana_atual: joi.string().required(),
-    classe_armadura: joi.string().max(2).required(),
-    id_user: joi.string().required(),
+    // nivel_total: joi.string().max(2),
+    // vida_atual: joi.string(),
+    // mana_atual: joi.string(),
+    // classe_armadura: joi.string().max(2),
+    // id_user: joi.string(),
     cod_classe: joi.string().required(),
     cod_raca: joi.string().required()
 });
@@ -42,8 +43,8 @@ exports.buscarPersonagem = (req, res) => {
 };
 
 exports.adicionarPersonagem = (req, res) => {
-    const { forca, destreza, constituicao, inteligencia, sabedoria, carisma, nome, nivel_total, vida_atual, mana_atual, classe_armadura, id_user, cod_classe, cod_raca } = req.body;
-    const { error } = personagemSchema.validate({ forca, destreza, constituicao, inteligencia, sabedoria, carisma, nome, nivel_total, vida_atual, mana_atual, classe_armadura, id_user, cod_classe, cod_raca });
+    const { forca, destreza, constituicao, inteligencia, sabedoria, carisma, nome, cod_classe, cod_raca } = req.body;
+    const { error } = personagemSchema.validate({ forca, destreza, constituicao, inteligencia, sabedoria, carisma, nome, cod_classe, cod_raca });
     if (error) {
         res.status(400).json({ error: 'dados de personagem invalidos' });
         return;
@@ -56,11 +57,6 @@ exports.adicionarPersonagem = (req, res) => {
         sabedoria,
         carisma,
         nome,
-        nivel_total,
-        vida_atual,
-        mana_atual,
-        classe_armadura,
-        id_user,
         cod_classe,
         cod_raca
     }

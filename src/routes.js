@@ -24,9 +24,9 @@ router.post('/user', usercontroller.adicionarUser);
 router.patch('/user/:id_user', loginController.autenticarToken, usercontroller.atualizarUser);
 router.delete('/user/:id_user', loginController.autenticarToken, usercontroller.deletarUser);
 
-router.get('/personagem', loginController.autenticarToken, personagemcontroller.listaPersonagem)
+router.get('/personagem', personagemcontroller.listaPersonagem)
 router.get('/personagem/:cod_personagem', loginController.autenticarToken, personagemcontroller.buscarPersonagem)
-router.post('/personagem',loginController.autenticarToken, personagemcontroller.adicionarPersonagem)
+router.post('/personagem', personagemcontroller.adicionarPersonagem)
 router.patch('/personagem/:cod_personagem',loginController.autenticarToken, personagemcontroller.atualizarPersonagem)
 router.delete('/personagem/:cod_personagem',loginController.autenticarToken,personagemcontroller.deletarPersonagem)
 
