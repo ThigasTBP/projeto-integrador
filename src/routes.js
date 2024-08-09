@@ -15,6 +15,7 @@ const habilidadeRacialcontroller=require('./habilidadeRacialController')
 const poderClasseController=require('./poderesClasseController')
 const aprendeController=require('./aprendeController')
 const magiaController=require('./magiaController')
+const testeController = require('./testecontroller')
 
 router.post('/login', loginController.loginUser)
 
@@ -65,5 +66,9 @@ router.get('/magia/:cod_magia', loginController.autenticarToken, magiaController
 router.post('/magia', loginController.autenticarToken, magiaController.adicionarMagia)
 router.patch('/magia/:cod_magia', loginController.autenticarToken, magiaController.atualizarMagia)
 router.delete('/magia/:cod_magia', loginController.autenticarToken, magiaController.deletarMagia)
+
+
+router.post('/teste', testeController.adicionarTeste)
+router.get('/teste', testeController.listaTeste)
 
 module.exports = router;
