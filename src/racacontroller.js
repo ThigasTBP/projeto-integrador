@@ -6,6 +6,7 @@ const racaSchema = joi.object({
     nome: joi.string().required(),
     tamanho: joi.string().required(),
     deslocamento: joi.string().max(2).required(),
+    descricao: joi.string(),
     forca: joi.string().max(2).required(),
     destreza: joi.string().max(2).required(),
     constituicao: joi.string().max(2).required(),
@@ -37,8 +38,8 @@ exports.buscarRaca = (req, res) => {
 }
 
 exports.adicionarRaca = (req, res) => {
-    const { nome, tamanho, deslocamento, forca, destreza, constituicao, inteligencia, sabedoria, carisma } = req.body;
-    const { error } = racaSchema.validate({ nome, tamanho, deslocamento, forca, destreza, constituicao, inteligencia, sabedoria, carisma });
+    const { nome, tamanho, deslocamento, descricao, forca, destreza, constituicao, inteligencia, sabedoria, carisma } = req.body;
+    const { error } = racaSchema.validate({ nome, tamanho, deslocamento, descricao, forca, destreza, constituicao, inteligencia, sabedoria, carisma });
     if (error) {
         res.status(400).json({ error: 'dados de raca invalidos' })
         return;
@@ -47,6 +48,7 @@ exports.adicionarRaca = (req, res) => {
         nome,
         tamanho,
         deslocamento,
+        descricao,
         forca,
         destreza,
         constituicao,
@@ -65,8 +67,8 @@ exports.adicionarRaca = (req, res) => {
 };
 exports.atualizarRaca = (req, res) => {
     const { cod_raca } = req.params;
-    const { nome, tamanho, deslocamento, forca, destreza, constituicao, inteligencia, sabedoria, carisma } = req.body;
-    const { error } = racaSchema.validate({ nome, tamanho, deslocamento, forca, destreza, constituicao, inteligencia, sabedoria, carisma });
+    const { nome, tamanho, deslocamento, descricao, forca, destreza, constituicao, inteligencia, sabedoria, carisma } = req.body;
+    const { error } = racaSchema.validate({ nome, tamanho, deslocamento, descricao, forca, destreza, constituicao, inteligencia, sabedoria, carisma });
     if (error) {
         res.status(400).json({ error: 'dados de raca invalidos' })
         return;
@@ -75,6 +77,7 @@ exports.atualizarRaca = (req, res) => {
         nome,
         tamanho,
         deslocamento,
+        descricao,
         forca,
         destreza,
         constituicao,
