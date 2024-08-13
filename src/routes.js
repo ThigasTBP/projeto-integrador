@@ -15,7 +15,6 @@ const habilidadeRacialcontroller=require('./habilidadeRacialController')
 const poderClasseController=require('./poderesClasseController')
 const aprendeController=require('./aprendeController')
 const magiaController=require('./magiaController')
-const testeController = require('./testecontroller')
 
 router.post('/login', loginController.loginUser)
 
@@ -31,14 +30,14 @@ router.post('/personagem', personagemcontroller.adicionarPersonagem)
 router.patch('/personagem/:cod_personagem',loginController.autenticarToken, personagemcontroller.atualizarPersonagem)
 router.delete('/personagem/:cod_personagem',loginController.autenticarToken,personagemcontroller.deletarPersonagem)
 
-router.get('/raca', loginController.autenticarToken, racacontroller.listaRaca)
-router.get('/raca/:cod_raca', loginController.autenticarToken, racacontroller.buscarRaca)
+router.get('/raca', racacontroller.listaRaca)
+router.get('/raca/:cod_raca', racacontroller.buscarRaca)
 router.post('/raca', loginController.autenticarToken, racacontroller.adicionarRaca)
 router.patch('/raca/:cod_raca', loginController.autenticarToken, racacontroller.atualizarRaca)
 router.delete('/raca/:cod_raca', loginController.autenticarToken, racacontroller.deletarRaca)
 
-router.get('/classe', loginController.autenticarToken, classecontroller.listaClasse);
-router.get('/classe/:cod_classe', loginController.autenticarToken, classecontroller.buscarClasse);
+router.get('/classe', classecontroller.listaClasse);
+router.get('/classe/:cod_classe', classecontroller.buscarClasse);
 router.post('/classe', loginController.autenticarToken, classecontroller.adicionarClasse )
 router.patch('/classe/:cod_classe', loginController.autenticarToken, classecontroller.atualizarClasse)
 router.delete('/classe/:cod_classe', loginController.autenticarToken, classecontroller.deletarClasse)
@@ -66,9 +65,5 @@ router.get('/magia/:cod_magia', loginController.autenticarToken, magiaController
 router.post('/magia', loginController.autenticarToken, magiaController.adicionarMagia)
 router.patch('/magia/:cod_magia', loginController.autenticarToken, magiaController.atualizarMagia)
 router.delete('/magia/:cod_magia', loginController.autenticarToken, magiaController.deletarMagia)
-
-
-router.post('/teste', testeController.adicionarTeste)
-router.get('/teste', testeController.listaTeste)
 
 module.exports = router;

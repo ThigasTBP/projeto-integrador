@@ -34,7 +34,7 @@ exports.adicionarUser = (req, res) => {
     const { error } = userSchema.validate({ email, senha });
 
     if (error) {
-        res.status(400).json({ error: 'dados de personagem invalidos' });
+        res.status(400).json({ error: 'dados de usuario invalidos' });
         return;
     }
     bcrypt.hash(senha, 10, (err, hash) => {

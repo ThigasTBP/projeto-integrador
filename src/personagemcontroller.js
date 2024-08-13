@@ -3,7 +3,6 @@ const joi = require('joi')
 const bcrypt = require('bcrypt')
 
 const personagemSchema = joi.object({
-    cod_personagem: joi.string().required(),
     forca: joi.string().required(),
     destreza: joi.string().required(),
     constituicao: joi.string().required(),
@@ -11,13 +10,14 @@ const personagemSchema = joi.object({
     sabedoria: joi.string().required(),
     carisma: joi.string().required(),
     nome: joi.string().required(),
-    // nivel_total: joi.string(),
-    // vida_atual: joi.string(),
-    // mana_atual: joi.string(),
-    // classe_armadura: joi.string(),
-    // id_user: joi.string(),
+    nivel_total: joi.string().required(),
+    vida_atual: joi.string(),
+    mana_atual: joi.string(),
+    classe_armadura: joi.string(),
+    id_user: joi.string(),
     cod_classe: joi.string().required(),
-    cod_raca: joi.string().required()
+    cod_raca: joi.string().required(),
+    raca_atributo: joi.string().required()
 });
 
 exports.listaPersonagem = (req, res) => {
@@ -43,14 +43,14 @@ exports.buscarPersonagem = (req, res) => {
 };
 
 exports.adicionarPersonagem = (req, res) => {
-    const { cod_personagem, forca, destreza, constituicao, inteligencia, sabedoria, carisma, nome, cod_classe, cod_raca } = req.body;
-    const { error } = personagemSchema.validate({ cod_personagem, forca, destreza, constituicao, inteligencia, sabedoria, carisma, nome, cod_classe, cod_raca });
+    const {forca, destreza, constituicao, inteligencia, sabedoria, carisma, nome, nivel_total, vida_atual, mana_atual, classe_armadura, id_user, cod_classe, cod_raca, raca_atributo  } = req.body;
+    const { error } = personagemSchema.validate({forca, destreza, constituicao, inteligencia, sabedoria, carisma, nome, nivel_total, vida_atual, mana_atual, classe_armadura, id_user, cod_classe, cod_raca, raca_atributo });
     if (error) {
         res.status(400).json({ error: 'dados de personagem invalidos' });
         return;
     }
     const novoPersonagem = {
-        cod_personagem,
+
         forca,
         destreza,
         constituicao,
@@ -58,10 +58,16 @@ exports.adicionarPersonagem = (req, res) => {
         sabedoria,
         carisma,
         nome,
+        nivel_total,
+        vida_atual,
+        mana_atual,
+        classe_armadura,
+        id_user,
         cod_classe,
-        cod_raca
+        cod_raca,
+        raca_atributo
     }
-    db.query('insert into personagem1 set ?', novoPersonagem, (err, result) => {
+    db.query('insert into personagem set ?', novoPersonagem, (err, result) => {
         if (err) {
             console.error('erro ao adicionar personagem:', err);
             res.status(500).json({ error: 'erro interno do servidor' });
@@ -73,8 +79,8 @@ exports.adicionarPersonagem = (req, res) => {
 
 exports.atualizarPersonagem = (req, res) => {
     const { cod_personagem } = req.params;
-    const { forca, destreza, constituicao, inteligencia, sabedoria, carisma, nome, nivel_total, vida_atual, mana_atual, classe_armadura, id_user, cod_classe, cod_raca } = req.body;
-    const { error } = personagemSchema.validate({ forca, destreza, constituicao, inteligencia, sabedoria, carisma, nome, nivel_total, vida_atual, mana_atual, classe_armadura, id_user, cod_classe, cod_raca });
+    const { forca, destreza, constituicao, inteligencia, sabedoria, carisma, nome, nivel_total, vida_atual, mana_atual, classe_armadura, id_user, cod_classe, cod_raca , raca_atributo } = req.body;
+    const { error } = personagemSchema.validate({ forca, destreza, constituicao, inteligencia, sabedoria, carisma, nome, nivel_total, vida_atual, mana_atual, classe_armadura, id_user, cod_classe, cod_raca , raca_atributo});
     if (error) {
         res.status(400).json({ error: 'dados invalidos' });
         return;
@@ -93,7 +99,8 @@ exports.atualizarPersonagem = (req, res) => {
         classe_armadura,
         id_user,
         cod_classe,
-        cod_raca
+        cod_raca,
+        raca_atributo
     };
     db.query('update personagem set ? where cod_personagem = ?', [personagemAtualizado, cod_personagem], (err, result) => {
         if (err) {
